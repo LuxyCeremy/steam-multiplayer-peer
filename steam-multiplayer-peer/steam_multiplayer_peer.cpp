@@ -630,11 +630,11 @@ SteamNetworkingConfigValue_t *SteamMultiplayerPeer::get_convert_options() const 
 			} else if (type == Variant::FLOAT) {
 				this_option.SetFloat(this_value, options[sent_option]);
 			} else if (type == Variant::STRING) {
-				char *this_string = { 0 };
 				String passed_string = options[sent_option];
-				strcpy(this_string, passed_string.utf8().get_data());
-				this_option.SetString(this_value, this_string);
-			} else {
+				const char *cstr = passed_string.utf8().get_data();
+				this_option.SetString(this_value, cstr);
+			}
+			else {
 				Object *this_pointer;
 				this_pointer = options[sent_option];
 				this_option.SetPtr(this_value, this_pointer);
